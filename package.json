@@ -1,10 +1,12 @@
 {
-  "name": "@gethinode/mod-template",
-  "version": "0.0.0",
-  "description": "A template to define a Hugo module compatible with Hinode",
+  "name": "@anoduck/mod-pdfview",
+  "version": "0.0.1",
+  "description": "A Hinode module to allow embeded pdf files.",
   "keywords": [
     "hugo",
-    "module"
+    "module",
+    "pdf",
+    "document"
   ],
   "main": "index.js",
   "publishConfig": {
@@ -21,14 +23,17 @@
     "mod:update": "rimraf _vendor && hugo mod get -u ./... && hugo mod get -u && npm run -s mod:vendor && npm run -s mod:tidy",
     "mod:tidy": "hugo mod tidy",
     "mod:vendor": "rimraf _vendor && hugo mod vendor",
-    "postinstall": "echo TODO: add postinstall instructions",
+    "postinstall": "cd node_modules/pdfjs-dist && npx gulp generic && cd ../.. && npm run -s copy:js && npm run -s copy:css && npm run -s copy:script",
+    "copy:js": "cpy \"node_modules/pdfjs-dist/build/*.js\" \"!node_modules/pdfjs-dist/build/*.min.js\"  dist --flat",
+    "copy:css": "cpy \"assets/scss/pdfview.scss\" dist --flat",
+    "copy:script": "cpy \"assets/js/pdfview.js\" dist --flat",
     "test": "npm run -s build",
     "upgrade": "npx npm-check-updates -u && npm run -s mod:update",
     "prepare": "node .husky/install.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gethinode/mod-template.git"
+    "url": "git+https://github.com/anoduck/mod-pdfview.git"
   },
   "author": "Mark Dumay",
   "license": "MIT",
@@ -46,6 +51,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "hugo-bin": "^0.131.3",
     "husky": "^9.1.6",
+    "pdfjs-dist": "^4.6.82",
     "rimraf": "^6.0.1",
     "semantic-release": "^24.1.1"
   },
@@ -82,5 +88,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "gulp": "^5.0.0"
   }
 }

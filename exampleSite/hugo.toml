@@ -5,11 +5,24 @@ title = 'Test site for mod-template'
 [module]
   # Build and serve using local mod-template clone declared in the named Hugo workspace:
   workspace = "mod-template.work"
-  [[module.imports]]
-    path = "github.com/gethinode/mod-template"
-  [[module.imports.mounts]]
-    source = "dist"
+  replacements = 'github.com/anoduck/mod-pdfview -> ../..'
+  [[module.mounts]]
+    source = "static"
     target = "static"
+  [[module.imports]]
+    path = "github.com/anoduck/mod-pdfview"
   [[module.imports.mounts]]
-    source = "layouts"
-    target = "layouts"
+    source = "dist/pdf.js"
+    target = "static/js/pdf.js"
+  [[module.imports.mounts]]
+    source = "dist/pdf.worker.js"
+    target = "static/js/pdf.worker.js"
+  [[module.imports.mounts]]
+    source = "layouts/shortcodes/pdfview.html"
+    target = "layouts/shortcodes/pdfview.html"
+  [[module.imports.mounts]]
+    source = "dist/pdfview.scss"
+    target = "static/pdfview.css"
+  [[module.imports.mounts]]
+    source = "dist/pdfview.js"
+    target = "static/pdfview.js"

@@ -4,6 +4,22 @@
     min = "0.110.0"
     max = ""
   [[module.mounts]]
+    source = 'dist/pdf.js'
+    target = 'assets/js/modules/pdfview/pdf.js'
+  [[module.mounts]]
+    source = "dist/pdf.worker.js"
+    target = "assets/js/modules/pdfview/pdf.worker.js"
+  [[module.mounts]]
+    source = 'dist/pdfview.js'
+    target = 'assets/js/modules/pdfview/pdfview.js'
+  [[module.mounts]]
+    source = 'dist'
+    target = 'assets/scss'
+    includeFile = 'pdfview.scss'
+  [[module.mounts]]
+    source = 'layouts/shortcodes/pdfview.html'
+    target = 'layouts/shortcodes/pdfview.html'
+  [[module.mounts]]
     source = 'layouts'
     target = 'layouts'
   [[module.mounts]]
